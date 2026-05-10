@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Golder409 Services</title>
+    <style>
+        :root {
+            --gold: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            --dark: #121212;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Bar Atas & Bawah */
+        header, footer {
+            background: var(--gold);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #413100;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(191, 149, 63, 0.5);
+        }
+
+        main {
+            flex: 1;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Container Paket */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Card Style */
+        .card {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: #bf953f;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            background: var(--gold);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.5rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .card li::before {
+            content: "✔ ";
+            color: #bf953f;
+        }
+
+        /* Tombol Telegram */
+        .btn {
+            display: block;
+            margin-top: 20px;
+            padding: 10px;
+            background: var(--gold);
+            color: #413100;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        footer {
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>OFFICIAL SERVICES</div>
+    </header>
+
+    <main>
+        <h1>Hi, i'm Golder409</h1>
+        
+        <div class="container">
+            <!-- Paket Hemat -->
+            <div class="card">
+                <h3>Paket Hemat (Bronze)</h3>
+                <ul>
+                    <li>Bot standar</li>
+                    <li>File binary saja</li>
+                    <li>Tanpa database</li>
+                </ul>
+                <a href="https://t.me/USERNAMEMU" class="btn">Order via Telegram</a>
+            </div>
+
+            <!-- Paket Pro -->
+            <div class="card">
+                <h3>Paket Pro (Silver)</h3>
+                <ul>
+                    <li>Bot + Database</li>
+                    <li>Fitur custom 3 buah</li>
+                    <li>Bantuan instalasi</li>
+                </ul>
+                <a href="https://t.me/USERNAMEMU" class="btn">Order via Telegram</a>
+            </div>
+
+            <!-- Paket Ultimate -->
+            <div class="card" style="border: 2px solid #bf953f;">
+                <h3>Paket Ultimate (Gold)</h3>
+                <ul>
+                    <li>Bot + Source code asli</li>
+                    <li>Fitur unlimited</li>
+                    <li>Garansi bug 1 bulan</li>
+                </ul>
+                <a href="https://t.me/USERNAMEMU" class="btn">Order via Telegram</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Golder409 - Cyber Security & Developer
+    </footer>
+
+</body>
+          </html>
+
