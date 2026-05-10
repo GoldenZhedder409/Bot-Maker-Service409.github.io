@@ -3,168 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Golder409 Services</title>
+    <title>Golder409 - Premium Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --gold: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --dark: #121212;
-            --white: #ffffff;
+            --diamond: linear-gradient(45deg, #b9f2ff, #e0faff, #89e8ff, #ffffff);
         }
+        body { background-color: #0a0a0a; color: white; overflow-x: hidden; }
+        
+        .gold-bar { background: var(--gold); color: #413100; }
+        .diamond-text { background: var(--diamond); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-text { background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Animasi Masuk */
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .animate-card { animation: slideUp 0.8s ease forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
 
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark);
-            color: var(--white);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Bar Atas & Bawah */
-        header, footer {
-            background: var(--gold);
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #413100;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(191, 149, 63, 0.5);
-        }
-
-        main {
-            flex: 1;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        /* Container Paket */
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Card Style */
-        .card {
-            background: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 20px;
-            width: 300px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: #bf953f;
-        }
-
-        .card h3 {
-            margin-top: 0;
-            background: var(--gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.5rem;
-        }
-
-        .card ul {
-            list-style: none;
-            padding: 0;
-            text-align: left;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-
-        .card li::before {
-            content: "✔ ";
-            color: #bf953f;
-        }
-
-        /* Tombol Telegram */
-        .btn {
-            display: block;
-            margin-top: 20px;
-            padding: 10px;
-            background: var(--gold);
-            color: #413100;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 6px;
-            transition: opacity 0.3s;
-        }
-
-        .btn:hover {
-            opacity: 0.8;
-        }
-
-        footer {
-            font-size: 0.8rem;
-        }
+        .slider-container { display: flex; transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1); width: 200%; }
+        .slide { width: 50%; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div>Official Maker Services</div>
+    <!-- Header Emas -->
+    <header class="gold-bar h-16 flex items-center justify-center font-bold shadow-lg fixed top-0 w-full z-50">
+        GOLDER409 OFFICIAL STORE
     </header>
 
-    <main>
-        <h1>Hi, i'm Golder409</h1>
+    <!-- Tombol Navigasi Panah -->
+    <button onclick="toggleSlide()" class="fixed right-5 top-1/2 -translate-y-1/2 z-50 bg-yellow-600/20 hover:bg-yellow-500 p-4 rounded-full border border-yellow-500 transition-all group">
+        <span id="arrowIcon" class="block text-2xl group-hover:scale-125 transition-transform">➡️</span>
+    </button>
+
+    <div class="slider-container mt-20" id="mainSlider">
         
-        <div class="container">
-            <!-- Paket Hemat -->
-            <div class="card">
-                <h3>Paket Hemat (Bronze)</h3>
-                <ul>
-                    <li>Bot standar</li>
-                    <li>File binary saja</li>
-                    <li>Tanpa database</li>
-                </ul>
-                <a href="https://t.me/GolDer409" class="btn">Order via Telegram</a>
+        <!-- SECTION 1: BOT MAKER -->
+        <section class="slide px-6">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold gold-text">Hi, i'm Golder409</h1>
+                <p class="text-gray-400 mt-2 text-xl">Bot Maker Service (Source Code Only)</p>
             </div>
 
-            <!-- Paket Pro -->
-            <div class="card">
-                <h3>Paket Pro (Silver)</h3>
-                <ul>
-                    <li>Bot + Database</li>
-                    <li>Fitur custom 3 buah</li>
-                    <li>Bantuan instalasi</li>
-                </ul>
-                <a href="https://t.me/GolDer409" class="btn">Order via Telegram</a>
+            <div class="flex flex-wrap justify-center gap-6 pb-20">
+                <!-- GOLD (Utama) -->
+                <div class="animate-card delay-1 border-2 border-yellow-500 bg-gray-900 p-6 rounded-2xl w-80">
+                    <h3 class="text-2xl font-bold gold-text mb-4">🥇 GOLD</h3>
+                    <p class="text-sm mb-4">Bot + Source Code Asli, Fitur Unlimited, Garansi Bug.</p>
+                    <a href="https://t.me/USERNAMEMU" class="block gold-bar py-2 rounded-lg text-center font-bold">Order Now</a>
+                </div>
+                <!-- SILVER -->
+                <div class="animate-card delay-2 border border-gray-700 bg-gray-900/50 p-6 rounded-2xl w-80">
+                    <h3 class="text-2xl font-bold text-gray-300 mb-4">🥈 SILVER</h3>
+                    <p class="text-sm mb-4">Bot + Database, 3 Fitur Custom, Bantuan Instalasi.</p>
+                    <a href="https://t.me/USERNAMEMU" class="block border border-gray-400 py-2 rounded-lg text-center">Contact</a>
+                </div>
+                <!-- BRONZE -->
+                <div class="animate-card delay-3 border border-gray-800 bg-gray-900/30 p-6 rounded-2xl w-80">
+                    <h3 class="text-2xl font-bold text-orange-700 mb-4">🥉 BRONZE</h3>
+                    <p class="text-sm mb-4">Bot Standar, File Binary Saja, Tanpa Database.</p>
+                    <a href="https://t.me/USERNAMEMU" class="block border border-gray-600 py-2 rounded-lg text-center">Contact</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: WEB MAKER -->
+        <section class="slide px-6">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold diamond-text">Web Maker Pro</h1>
+                <p class="text-gray-400 mt-2 text-xl italic">Powered by Golang & Red Team Security</p>
             </div>
 
-            <!-- Paket Ultimate -->
-            <div class="card" style="border: 2px solid #bf953f;">
-                <h3>Paket Ultimate (Gold)</h3>
-                <ul>
-                    <li>Bot + Source code asli</li>
-                    <li>Fitur unlimited</li>
-                    <li>Garansi bug 1 bulan</li>
-                </ul>
-                <a href="https://t.me/GolDer409" class="btn">Order via Telegram</a>
-            </div>
-        </div>
-    </main>
+            <div class="flex flex-wrap justify-center gap-6 pb-20">
+                <!-- DIAMOND (Utama) -->
+                <div class="animate-card delay-1 border-2 border-blue-300 bg-blue-900/20 p-6 rounded-2xl w-80 shadow-[0_0_20px_rgba(185,242,255,0.3)]">
+                    <h3 class="text-2xl font-bold diamond-text mb-2">💎 DIAMOND</h3>
+                    <p class="text-blue-200 font-bold mb-2">Rp 7.500.000++</p>
+                    <ul class="text-xs text-gray-300 mb-6 space-y-1">
+                        <li>• Full Custom & Source Code</li>
+                        <li>• Setup VPS Mandiri</li>
+                        <li>• <b>Security Audit & Pentest</b></li>
+                    </ul>
+                    <a href="https://t.me/USERNAMEMU" class="block bg-blue-400 text-black py-2 rounded-lg text-center font-bold">Inquiry Enterprise</a>
+                </div>
 
-    <footer>
-        &copy; 2026 Golder409 - Cyber Security & Developer
+                <!-- GOLD -->
+                <div class="animate-card delay-2 border border-yellow-600 bg-gray-900 p-6 rounded-2xl w-80">
+                    <h3 class="text-2xl font-bold gold-text mb-2">🥇 GOLD</h3>
+                    <p class="text-yellow-500 font-bold mb-2">Rp 3jt - 5jt</p>
+                    <ul class="text-xs text-gray-300 mb-6 space-y-1">
+                        <li>• Full Golang Architecture</li>
+                        <li>• API & Payment Gateway</li>
+                        <li>• Free Z-Bot Notification</li>
+                    </ul>
+                    <a href="https://t.me/USERNAMEMU" class="block gold-bar py-2 rounded-lg text-center font-bold">Select Gold</a>
+                </div>
+
+                <!-- SILVER -->
+                <div class="animate-card delay-3 border border-gray-600 bg-gray-900/50 p-6 rounded-2xl w-80">
+                    <h3 class="text-2xl font-bold text-gray-300 mb-2">🥈 SILVER</h3>
+                    <p class="text-gray-400 font-bold mb-2">Rp 1.500.000</p>
+                    <ul class="text-xs text-gray-300 mb-6 space-y-1">
+                        <li>• Up to 5 Pages (Backend Go)</li>
+                        <li>• Admin Panel & Database</li>
+                        <li>• Free Domain & Hosting</li>
+                    </ul>
+                    <a href="https://t.me/USERNAMEMU" class="block border border-gray-400 py-2 rounded-lg text-center">Select Silver</a>
+                </div>
+
+                <!-- BRONZE -->
+                <div class="animate-card delay-4 border border-gray-800 bg-gray-900/30 p-6 rounded-2xl w-80">
+                    <h3 class="text-2xl font-bold text-orange-700 mb-2">🥉 BRONZE</h3>
+                    <p class="text-orange-900 font-bold mb-2">Rp 750.000</p>
+                    <ul class="text-xs text-gray-300 mb-6 space-y-1">
+                        <li>• 1 Landing Page (Tailwind)</li>
+                        <li>• Responsive Design</li>
+                        <li>• Free Domain & Hosting</li>
+                    </ul>
+                    <a href="https://t.me/USERNAMEMU" class="block border border-gray-600 py-2 rounded-lg text-center">Select Bronze</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer Emas -->
+    <footer class="gold-bar h-12 flex items-center justify-center text-xs font-bold fixed bottom-0 w-full">
+        &copy; 2026 GOLDER409 | SECURE & HIGH-PERFORMANCE SOLUTIONS
     </footer>
 
+    <script>
+        let isWeb = false;
+        function toggleSlide() {
+            const slider = document.getElementById('mainSlider');
+            const arrow = document.getElementById('arrowIcon');
+            if (!isWeb) {
+                slider.style.transform = 'translateX(-50%)';
+                arrow.innerText = '⬅️';
+                isWeb = true;
+            } else {
+                slider.style.transform = 'translateX(0%)';
+                arrow.innerText = '➡️';
+                isWeb = false;
+            }
+        }
+    </script>
 </body>
-          </html>
-
+</html>
