@@ -7,183 +7,137 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --gold: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            --royal-blue: #4169E1;
-            --emerald: #50C878;
+            --gold-grad: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
         }
         
         html, body { 
             background-color: #050505; color: white; margin: 0; padding: 0; 
-            width: 100%; height: 100%; overflow: hidden; position: fixed; 
+            width: 100%; height: 100%; overflow: hidden; position: fixed; font-family: sans-serif;
         }
         
-        .gold-bar { background: var(--gold); color: #413100; }
-        .gold-text { background: var(--gold); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-bar { background: var(--gold-grad); color: #413100; }
+        .gold-text { background: var(--gold-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* Card Transitions */
-        .card { transition: all 0.3s ease; cursor: pointer; }
-        .card:active { transform: scale(1.05); }
+        /* Animation Entrance */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-entry { opacity: 0; animation: fadeInUp 0.6s ease forwards; }
 
-        /* Bot Page Colors */
-        .border-bot { border: 1px solid rgba(65, 105, 225, 0.4); }
-        .text-silver { color: #e2e8f0; }
-        .text-bronze { color: #cd7f32; }
-        .text-gold-pkg { color: #ffd700; }
+        /* Card States */
+        .card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; }
+        .card.active { transform: scale(1.05); z-index: 10; }
+        .card.inactive { transform: scale(0.95); opacity: 0.7; }
+        
+        /* Glow Effects */
+        .glow-bot.active { box-shadow: 0 10px 30px -5px rgba(65, 105, 225, 0.3); border-color: rgba(65, 105, 225, 0.8); }
+        .glow-web.active { box-shadow: 0 10px 30px -5px rgba(80, 200, 120, 0.3); border-color: rgba(80, 200, 120, 0.8); }
+        .card-recommended.active { box-shadow: 0 15px 40px -5px rgba(255, 215, 0, 0.4) !important; }
 
-        /* Web Page Colors */
-        .border-web { border: 1px solid rgba(80, 200, 120, 0.4); }
-        .text-diamond { color: #b9f2ff; }
+        .btn-order { display: none; transition: all 0.3s; }
+        .active .btn-order { display: block; animation: fadeInUp 0.3s ease; }
+        .active .btn-contact { display: none; }
 
         .main-viewport { position: absolute; top: 64px; bottom: 48px; left: 0; right: 0; overflow: hidden; }
         .slider-container { display: flex; height: 100%; width: 300%; transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1); }
-        .slide { width: 33.333%; height: 100%; overflow-y: auto; padding: 20px; -webkit-overflow-scrolling: touch; }
+        .slide { width: 33.333%; height: 100%; overflow-y: auto; padding: 20px 10px; }
     </style>
 </head>
 <body>
 
-    <header class="gold-bar h-16 flex items-center justify-center font-bold shadow-lg fixed top-0 w-full z-50 text-xs tracking-widest uppercase">
+    <header class="gold-bar h-16 flex items-center justify-center font-bold shadow-lg fixed top-0 w-full z-50 text-[10px] tracking-widest uppercase">
         GOLDER409 OFFICIAL SERVICES & ACADEMY
     </header>
 
-    <button onclick="nextSlide()" class="fixed right-4 top-1/2 -translate-y-1/2 z-50 bg-white/10 p-4 rounded-full border border-white/20 backdrop-blur-md shadow-2xl">
-        <span id="arrowIcon" class="block text-2xl">➡️</span>
+    <button onclick="nextSlide()" class="fixed right-4 top-1/2 -translate-y-1/2 z-50 bg-white/10 p-4 rounded-full border border-white/20 backdrop-blur-md">
+        <span id="arrowIcon" class="block text-xl">➡️</span>
     </button>
 
     <div class="main-viewport">
         <div class="slider-container" id="mainSlider">
             
-            <!-- SLIDE 1: BOT MAKER (ROYAL BLUE THEME) -->
-            <section class="slide">
+            <!-- SLIDE 1: BOT MAKER -->
+            <section class="slide" id="slide-bot">
                 <div class="text-center mb-6">
-                    <h2 class="text-2xl font-black text-blue-500 uppercase tracking-tighter">Bot Maker Service</h2>
-                    <p class="text-[10px] text-gray-500">High Performance Source Code</p>
+                    <h2 class="text-2xl font-black text-blue-500 uppercase">Bot Maker Service</h2>
                 </div>
-
-                <div class="flex flex-col items-center gap-4 pb-10">
+                <div class="flex flex-col items-center gap-4 pb-10" id="bot-list">
                     <!-- SILVER (Unggulan) -->
-                    <div class="card border-2 border-blue-500 bg-blue-900/10 p-5 rounded-2xl w-full max-w-xs shadow-[0_0_15px_rgba(65,105,225,0.2)]">
-                        <h3 class="text-xl font-bold text-silver mb-1">🥈 SILVER (Best Value)</h3>
-                        <p class="font-bold">Rp 1.500.000 <span class="text-[10px] text-gray-400 font-normal">| DP: 800k</span></p>
-                        <ul class="text-[10px] text-gray-300 my-3 space-y-1">
-                            <li>• Bot + Database Integration</li>
-                            <li>• 3 Custom Features</li>
-                            <li>• Support Installation</li>
-                        </ul>
-                        <button onclick="window.location.href='https://t.me/GolDer409'" class="w-full bg-blue-600 py-2 rounded-lg font-bold text-xs">ORDER SILVER</button>
+                    <div class="card card-recommended active glow-bot border-2 border-blue-500 bg-blue-900/10 p-5 rounded-2xl w-full max-w-xs animate-entry" style="animation-delay: 0.1s" onclick="selectCard(this, 'bot')">
+                        <h3 class="text-lg font-bold text-slate-200">🥈 SILVER (Best Value)</h3>
+                        <p class="text-sm font-bold">Rp 300.000 <span class="text-[10px] text-gray-500">| DP: 100.000</span></p>
+                        <ul class="text-[10px] text-gray-400 my-3 space-y-1"><li>• Bot + Database Integration</li><li>• 3 Custom Features</li><li>• Support Installation</li></ul>
+                        <button class="btn-order w-full bg-blue-600 py-2 rounded-lg font-bold text-xs" onclick="location.href='https://t.me/GolDer409'">ORDER SILVER</button>
                     </div>
-
                     <!-- BRONZE -->
-                    <div class="card border-bot bg-gray-900/40 p-4 rounded-xl w-full max-w-xs">
-                        <h3 class="text-lg font-bold text-bronze mb-1">🥉 BRONZE</h3>
-                        <p class="text-sm font-bold">Rp 850.000 <span class="text-[10px] text-gray-500 font-normal">| DP: 500k</span></p>
-                        <ul class="text-[10px] text-gray-400 my-2 space-y-0.5">
-                            <li>• Standard Bot (Binary Only)</li>
-                            <li>• No Database Support</li>
-                        </ul>
-                        <button onclick="window.location.href='https://t.me/GolDer409'" class="w-full border border-blue-900 py-1.5 rounded-md text-[10px]">CONTACT</button>
+                    <div class="card glow-bot border border-blue-900/40 bg-gray-900/40 p-4 rounded-xl w-full max-w-xs animate-entry" style="animation-delay: 0.3s" onclick="selectCard(this, 'bot')">
+                        <h3 class="text-md font-bold text-orange-400">🥉 BRONZE</h3>
+                        <p class="text-xs">Rp 100.000 <span class="text-[10px] text-gray-600">| DP: 80.000</span></p>
+                        <ul class="text-[10px] text-gray-500 my-2"><li>• Standard Bot (Binary Only)</li></ul>
+                        <button class="btn-contact w-full border border-blue-900 py-1 rounded-md text-[10px]">Contact</button>
+                        <button class="btn-order w-full bg-blue-600 py-2 rounded-lg font-bold text-xs" onclick="location.href='https://t.me/GolDer409'">ORDER BRONZE</button>
                     </div>
-
                     <!-- GOLD -->
-                    <div class="card border-bot bg-gray-900/40 p-4 rounded-xl w-full max-w-xs">
-                        <h3 class="text-lg font-bold text-gold-pkg mb-1">🥇 GOLD</h3>
-                        <p class="text-sm font-bold">Rp 3.500.000 <span class="text-[10px] text-gray-500 font-normal">| DP: 1.8jt</span></p>
-                        <ul class="text-[10px] text-gray-400 my-2 space-y-0.5">
-                            <li>• Full Source Code Delivery</li>
-                            <li>• Unlimited Features</li>
-                            <li>• 1 Month Bug Warranty</li>
-                        </ul>
-                        <button onclick="window.location.href='https://t.me/GolDer409'" class="w-full border border-blue-900 py-1.5 rounded-md text-[10px]">CONTACT</button>
+                    <div class="card glow-bot border border-blue-900/40 bg-gray-900/40 p-4 rounded-xl w-full max-w-xs animate-entry" style="animation-delay: 0.5s" onclick="selectCard(this, 'bot')">
+                        <h3 class="text-md font-bold text-yellow-500">🥇 GOLD</h3>
+                        <p class="text-xs">Rp 500.000 <span class="text-[10px] text-gray-600">| DP: 300.000</span></p>
+                        <ul class="text-[10px] text-gray-500 my-2"><li>• Full Source Code Delivery</li></ul>
+                        <button class="btn-contact w-full border border-blue-900 py-1 rounded-md text-[10px]">Contact</button>
+                        <button class="btn-order w-full bg-blue-600 py-2 rounded-lg font-bold text-xs" onclick="location.href='https://t.me/GolDer409'">ORDER GOLD</button>
                     </div>
                 </div>
             </section>
 
-            <!-- SLIDE 2: WEB MAKER (EMERALD GREEN THEME) -->
-            <section class="slide">
+            <!-- SLIDE 2: WEB MAKER -->
+            <section class="slide" id="slide-web">
                 <div class="text-center mb-6">
-                    <h2 class="text-2xl font-black text-emerald-500 uppercase tracking-tighter">Web Architect</h2>
-                    <p class="text-[10px] text-gray-500">Secure Golang Backend</p>
+                    <h2 class="text-2xl font-black text-emerald-500 uppercase">Web Architect</h2>
                 </div>
-
-                <div class="flex flex-col items-center gap-4 pb-10">
+                <div class="flex flex-col items-center gap-4 pb-10" id="web-list">
                     <!-- GOLD (Unggulan) -->
-                    <div class="card border-2 border-emerald-500 bg-emerald-900/10 p-5 rounded-2xl w-full max-w-xs shadow-[0_0_15px_rgba(80,200,120,0.2)]">
-                        <h3 class="text-xl font-bold text-gold-pkg mb-1">🥇 GOLD (Pro System)</h3>
-                        <p class="font-bold">Rp 3.500.000 <span class="text-[10px] text-gray-400 font-normal">| DP: 1.8jt</span></p>
-                        <ul class="text-[10px] text-gray-300 my-3 space-y-1">
-                            <li>• Full Golang Architecture</li>
-                            <li>• Payment Gateway & API</li>
-                            <li>• Z-Bot Integration</li>
-                        </ul>
-                        <button onclick="window.location.href='https://t.me/GolDer409'" class="w-full bg-emerald-600 py-2 rounded-lg font-bold text-xs">ORDER GOLD</button>
+                    <div class="card card-recommended active glow-web border-2 border-emerald-500 bg-emerald-900/10 p-5 rounded-2xl w-full max-w-xs animate-entry" style="animation-delay: 0.1s" onclick="selectCard(this, 'web')">
+                        <h3 class="text-lg font-bold text-yellow-500">🥇 GOLD (Pro System)</h3>
+                        <p class="text-sm font-bold">Rp 3.500.000 <span class="text-[10px] text-gray-500">| DP: 1.8jt</span></p>
+                        <ul class="text-[10px] text-gray-400 my-3 space-y-1"><li>• Full Golang Architecture</li><li>• Payment Gateway & API</li></ul>
+                        <button class="btn-order w-full bg-emerald-600 py-2 rounded-lg font-bold text-xs" onclick="location.href='https://t.me/GolDer409'">ORDER GOLD</button>
                     </div>
-
                     <!-- BRONZE -->
-                    <div class="card border-web bg-gray-900/40 p-4 rounded-xl w-full max-w-xs">
-                        <h3 class="text-lg font-bold text-bronze mb-1">🥉 BRONZE</h3>
-                        <p class="text-sm font-bold">Rp 850.000 <span class="text-[10px] text-gray-500 font-normal">| DP: 500k</span></p>
-                        <ul class="text-[10px] text-gray-400 my-2">
-                            <li>• Landing Page (HTML/Tailwind)</li>
-                            <li>• Hosting & Domain 1 Year</li>
-                        </ul>
+                    <div class="card glow-web border border-emerald-900/40 bg-gray-900/40 p-4 rounded-xl w-full max-w-xs animate-entry" style="animation-delay: 0.3s" onclick="selectCard(this, 'web')">
+                        <h3 class="text-md font-bold text-orange-400">🥉 BRONZE</h3>
+                        <p class="text-xs">Rp 850.000</p>
+                        <ul class="text-[10px] text-gray-500 my-2"><li>• Landing Page Only</li></ul>
+                        <button class="btn-order w-full bg-emerald-600 py-2 rounded-lg font-bold text-xs" onclick="location.href='https://t.me/GolDer409'">ORDER BRONZE</button>
                     </div>
-
-                    <!-- SILVER -->
-                    <div class="card border-web bg-gray-900/40 p-4 rounded-xl w-full max-w-xs">
-                        <h3 class="text-lg font-bold text-silver mb-1">🥈 SILVER</h3>
-                        <p class="text-sm font-bold">Rp 1.500.000 <span class="text-[10px] text-gray-500 font-normal">| DP: 800k</span></p>
-                        <ul class="text-[10px] text-gray-400 my-2">
-                            <li>• Up to 5 Pages + Backend Go</li>
-                            <li>• Database & Admin Panel</li>
-                        </ul>
-                    </div>
-
                     <!-- DIAMOND -->
-                    <div class="card border-web bg-gray-900/40 p-4 rounded-xl w-full max-w-xs">
-                        <h3 class="text-lg font-bold text-diamond mb-1">💎 DIAMOND</h3>
-                        <p class="text-sm font-bold">Rp 7.500.000 <span class="text-[10px] text-gray-500 font-normal">| DP: 4jt</span></p>
-                        <ul class="text-[10px] text-gray-400 my-2">
-                            <li>• Full Custom System & VPS</li>
-                            <li>• Red Team Security Audit</li>
-                        </ul>
+                    <div class="card glow-web border border-emerald-900/40 bg-gray-900/40 p-4 rounded-xl w-full max-w-xs animate-entry" style="animation-delay: 0.5s" onclick="selectCard(this, 'web')">
+                        <h3 class="text-md font-bold text-cyan-300">💎 DIAMOND</h3>
+                        <p class="text-xs">Rp 7.500.000</p>
+                        <ul class="text-[10px] text-gray-500 my-2"><li>• Full Custom & Red Team Audit</li></ul>
+                        <button class="btn-order w-full bg-emerald-600 py-2 rounded-lg font-bold text-xs" onclick="location.href='https://t.me/GolDer409'">ORDER DIAMOND</button>
                     </div>
                 </div>
             </section>
 
-            <!-- SLIDE 3: ACADEMY (GOLD THEME) -->
+            <!-- SLIDE 3: ACADEMY (GOLD) -->
             <section class="slide">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-black gold-text uppercase">Free Academy</h2>
-                    <p class="text-xs text-gray-500">Learning & Execution Center</p>
-                </div>
-
+                <div class="text-center mb-8"><h2 class="text-3xl font-black gold-text uppercase">Free Academy</h2></div>
                 <div class="flex justify-center">
-                    <div class="card border-2 border-yellow-600 bg-gray-900/80 p-8 rounded-3xl w-full max-w-sm text-center shadow-[0_0_30px_rgba(191,149,63,0.3)]">
-                        <h4 class="text-lg font-bold mb-6 text-yellow-400 underline decoration-yellow-600">SYARAT BERGABUNG</h4>
-                        <div class="space-y-6 text-left mb-10">
-                            <div class="flex items-center gap-3">
-                                <span class="text-xl">⚡</span>
-                                <p class="text-xs">Datang <b class="text-yellow-500">bukan</b> sebagai pemula (Basic skill required).</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="text-xl">⚔️</span>
-                                <p class="text-xs">Masuk langsung <b class="text-yellow-500">Eksekusi</b> (No more theory).</p>
-                            </div>
+                    <div class="card border-2 border-yellow-600 bg-gray-900/80 p-8 rounded-3xl w-full max-w-sm text-center shadow-[0_0_30px_rgba(191,149,63,0.3)] animate-entry">
+                        <h4 class="text-sm font-bold mb-6 text-yellow-400 underline">Yang Anda Dapatkan</h4>
+                        <div class="space-y-4 text-left mb-8 text-[11px]">
+                            <p>- Datang <b class="text-yellow-500">bukan</b> sebagai pemula.</p>
+                            <p>- Masuk langsung <b class="text-yellow-500">Eksekusi</b>.</p>
                         </div>
-                        
-                        <p class="text-[10px] text-gray-400 mb-4 tracking-widest uppercase">Join Community</p>
-                        <a href="https://discord.gg/gf2Vmz82rG" class="inline-block bg-[#5865F2] p-4 rounded-2xl shadow-xl hover:scale-110 active:scale-95 transition-all">
-                            <svg class="w-8 h-8 fill-white" viewBox="0 0 127.14 96.36">
-                                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.24,80.13h0a105.73,105.73,0,0,0,32.17,16.23,77.7,77.7,0,0,0,7.13-11.59,68.43,68.43,0,0,1-11.44-5.42.09.09,0,0,1,0-.15,48.22,48.22,0,0,0,2.5-1.92.08.08,0,0,1,.08,0c20.7,9.45,43.24,9.45,63.67,0a.08.08,0,0,1,.08,0,45.3,45.3,0,0,0,2.5,1.92.09.09,0,0,1,0,.15,69.3,69.3,0,0,1-11.44,5.42,77.91,77.91,0,0,0,7.13,11.59,105.47,105.47,0,0,0,32.19-16.23c2.72-27.19-4.57-51-19.34-72.06ZM42.45,65.69c-6.22,0-11.38-5.71-11.38-12.73S36.23,40.23,42.45,40.23,53.83,45.94,53.83,53s-5.05,12.73-11.38,12.73Zm42.24,0c-6.22,0-11.38-5.71-11.38-12.73S78.47,40.23,84.69,40.23,96.07,45.94,96.07,53s-5.05,12.73-11.38,12.73Z"/>
-                            </svg>
-                        </a>
+                        <a href="https://discord.gg/gf2Vmz82rG" class="inline-block bg-[#5865F2] p-4 rounded-2xl"><svg class="w-8 h-8 fill-white" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.24,80.13h0a105.73,105.73,0,0,0,32.17,16.23,77.7,77.7,0,0,0,7.13-11.59,68.43,68.43,0,0,1-11.44-5.42.09.09,0,0,1,0-.15,48.22,48.22,0,0,0,2.5-1.92.08.08,0,0,1,.08,0c20.7,9.45,43.24,9.45,63.67,0a.08.08,0,0,1,.08,0,45.3,45.3,0,0,0,2.5,1.92.09.09,0,0,1,0-.15,69.3,69.3,0,0,1-11.44,5.42,77.91,77.91,0,0,0,7.13,11.59,105.47,105.47,0,0,0,32.19-16.23c2.72-27.19-4.57-51-19.34-72.06ZM42.45,65.69c-6.22,0-11.38-5.71-11.38-12.73S36.23,40.23,42.45,40.23,53.83,45.94,53.83,53s-5.05,12.73-11.38,12.73Zm42.24,0c-6.22,0-11.38-5.71-11.38-12.73S78.47,40.23,84.69,40.23,96.07,45.94,96.07,53s-5.05,12.73-11.38,12.73Z"/></svg></a>
                     </div>
                 </div>
             </section>
         </div>
     </div>
 
-    <footer class="gold-bar h-12 flex items-center justify-center text-center fixed bottom-0 w-full z-50 px-4">
-        <p class="text-[9px] font-bold">&copy; 2026 GOLDER409 | 24/7 SECURE MONITORING</p>
+    <footer class="gold-bar h-12 flex items-center justify-center text-[8px] font-bold fixed bottom-0 w-full z-50">
+        &copy; 2026 GOLDER409 | 24/7 SECURE MONITORING ACTIVATED
     </footer>
 
     <script>
@@ -192,6 +146,31 @@
             currentSlide = (currentSlide + 1) % 3;
             document.getElementById('mainSlider').style.transform = `translateX(-${currentSlide * 33.333}%)`;
             document.getElementById('arrowIcon').innerText = currentSlide === 2 ? '🔄' : '➡️';
+            triggerAnimation(currentSlide);
+        }
+
+        function triggerAnimation(slideIndex) {
+            const slides = ['bot-list', 'web-list'];
+            if (slideIndex < 2) {
+                const container = document.getElementById(slides[slideIndex]);
+                const cards = container.querySelectorAll('.animate-entry');
+                cards.forEach((card, i) => {
+                    card.style.animation = 'none';
+                    card.offsetHeight; /* trigger reflow */
+                    card.style.animation = `fadeInUp 0.6s ease forwards ${i * 0.2}s`;
+                });
+            }
+        }
+
+        function selectCard(element, type) {
+            const container = element.parentElement;
+            const allCards = container.querySelectorAll('.card');
+            allCards.forEach(c => {
+                c.classList.remove('active');
+                c.classList.add('inactive');
+            });
+            element.classList.remove('inactive');
+            element.classList.add('active');
         }
     </script>
 </body>
